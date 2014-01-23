@@ -12,12 +12,12 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require "2amigos/yii2-file-input-widget" "*"
+php composer.phar require "mirocow/yii2-file-input-widget" "*"
 ```
 or add
 
 ```json
-"2amigos/yii2-file-input-widget" : "*"
+"mirocow/yii2-file-input-widget" : "*"
 ```
 
 to the require section of your application's `composer.json` file.
@@ -27,14 +27,14 @@ Usage
 Using a model:
 
 ```
-use dosamigos\fileinput\FileInput;
+use mirocow\fileinput\FileInput;
 
 <?=FileInput::widget([
     'model' => $model,
     'attribute' => 'image', // image is the attribute
     // using STYLE_IMAGE allows me to display an image. Cool to display previously
     // uploaded images
-    'thumbnail' => $model->getAvatarImage(),
+    'thumbnail' => $model->getThumbnailUrl(),
     'style' => FileInput::STYLE_IMAGE
 ]);?>
 ```
