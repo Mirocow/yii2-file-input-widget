@@ -1,5 +1,5 @@
 {
-    "name": "2amigos/yii2-file-input-widget",
+    "name": "mirocow/yii2-file-input-widget",
     "description": "Jasny File Input Bootstrap widget for Yii2.",
     "keywords": ["yii", "extension", "widget", "file input"],
     "type": "yii2-extension",
@@ -9,14 +9,19 @@
             "name": "Antonio Ramirez",
             "email": "ramirez.cobos@gmail.com",
             "homepage": "http://2amigos.us"
-        }
+        },
+        {
+            "name": "Mirocow",
+            "email": "mr.mirocow@gmail.com",
+            "homepage": "http://www.mirocow.com"
+        }		
     ],
     "require": {
         "yiisoft/yii2": "*"
     },
     "autoload": {
         "psr-4": {
-            "dosamigos\\fileinput\\": ""
+            "mirocow\\fileinput\\": ""
         }
     }
 }
