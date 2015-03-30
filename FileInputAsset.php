@@ -4,7 +4,7 @@
  * @link http://2amigos.us
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  */
-namespace dosamigos\fileinput;
+namespace mirocow\fileinput;
 
 use yii\web\AssetBundle;
 
@@ -16,10 +16,11 @@ use yii\web\AssetBundle;
  */
 class FileInputAsset extends AssetBundle
 {
-	public $sourcePath = '@vendor/2amigos/yii2-file-input-widget/assets';
+	public $sourcePath = '@vendor/mirocow/yii2-file-input-widget/assets';
 
 	public $js = [
-		'js/fileinput.js'
+		'js/fileinput.js',
+        'js/addMoreButton.js'
 	];
 
 	public $css = [
@@ -27,7 +28,7 @@ class FileInputAsset extends AssetBundle
 	];
 
 	public $depends = [
-		'yii\bootstrap\BootstrapPluginAsset'
+		//'yii\bootstrap\BootstrapPluginAsset'
 	];
 
 }

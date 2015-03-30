@@ -13,13 +13,26 @@
     cursor: pointer;
     opacity: 0;
     filter: alpha(opacity=0);
-    transform: translate(-300px, 0) scale(4);
+    /*transform: translate(-300px, 0) scale(4);*/
     direction: ltr;
 }
+
+
 
 .fileinput {
     display: inline-block;
     margin-bottom: 9px;
+}
+
+.fileinput i {
+    top:-2px;
+}
+
+.fileinput-label{
+    overflow:hidden;
+    height:20px;
+    display:inline-block;
+    width:90%;
 }
 
 .fileinput .uneditable-input {
@@ -108,4 +121,8 @@
 
 .form-group.has-success .fileinput .thumbnail {
     border-color: #d6e9c6;
+}
+
+.display-none {
+    display: none;
 }

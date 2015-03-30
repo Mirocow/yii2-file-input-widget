@@ -14,6 +14,7 @@ Either run
 ```
 php composer.phar require "mirocow/yii2-file-input-widget" "*"
 ```
+
 or add
 
 ```json
@@ -24,21 +25,136 @@ to the require section of your application's `composer.json` file.
 
 Usage
 -----
-Using a model:
 
+Using a model:
+==============
+
+```php
+    public function behaviors() {
+        $behaviors = [          
+            'fileupload' => [
+                'class' => 'mirocow\fileinput\behaviors\UploadFileBehavior',
+                'attributeName' => 'file'
+            ],            
+        ];
+        
+        return $behaviors;
+    }
 ```
+
+or extendig model File
+
+Example:
+```php
+<?php
+
+    namespace app\modules\core\models;
+
+    use mirocow\fileinput\models\File;
+
+    class Image extends File
+    {
+
+
+    }
+```
+
+Using a view:
+==============
+
+Example 1:
+```php
 use mirocow\fileinput\FileInput;
 
 <?=FileInput::widget([
     'model' => $model,
-    'attribute' => 'image', // image is the attribute
+    'name' => 'Image[name][]', // image is the attribute
     // using STYLE_IMAGE allows me to display an image. Cool to display previously
     // uploaded images
     'thumbnail' => $model->getThumbnailUrl(),
     'style' => FileInput::STYLE_IMAGE
 ]);?>
 ```
+Example 2:
+```php
+<?= FileInput::widget([
+  'name' => 'Image[name][]',
+  'style' => FileInput::STYLE_INPUT,
+  //'style' => FileInput::STYLE_CUSTOM,
+  //'customView' => __DIR__ . '/widgets/file_input.php',
+  'addMoreButton' => true,
+  'buttonCaption' => 'Дбавить еще',
+])?>
+```
 
-> [![2amigOS!](http://www.gravatar.com/avatar/55363394d72945ff7ed312556ec041e0.png)](http://www.2amigos.us)    
-<i>Web development has never been so fun!</i>
-[www.2amigos.us](http://www.2amigos.us)
+Using a view: JQuery Ajax Upload
+==============
+
+```js
+$('#my-form form').submit(function(){
+
+    var form = new FormData();
+
+    $.each($('#data-form :input'), function(i, file) {
+        var field_name = this.name;
+
+        if(this.name) {
+          if ($(this)[0].files) {
+            $.each($(this)[0].files, function (i, file) {
+              if(file.size) {
+                form.append(field_name, file);
+              }
+            });
+          } else {
+            var v = $(this).val();
+            if(v) {
+              form.append(field_name, v);
+            }
+          }
+        }
+    });
+
+    $.ajax({
+        type: "POST",
+        url: path,
+        data: form,
+        cache: false,
+        contentType: false,
+        processData: false
+
+    }).done(function( msg ) {
+
+      // something...
+
+    }).fail(function(msg){
+        
+      // Error  
+        
+    });
+
+    return false;
+});
+```
+
+Sql
+=================
+```sql
+CREATE TABLE `tbl_file` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL COMMENT 'ID профиля',
+  `name` varchar(255) NOT NULL DEFAULT '' COMMENT 'Файл',
+  `original_name` varchar(255) NOT NULL DEFAULT '',
+  `path` varchar(255) NOT NULL DEFAULT '' COMMENT 'Путь до файла',
+  `create_time` datetime DEFAULT NULL COMMENT 'Дата создания',
+  `update_time` datetime DEFAULT NULL COMMENT 'Дата обновления',
+  `entity_type` varchar(255) NOT NULL DEFAULT '' COMMENT 'Тип сущности',
+  `entity_id` int(11) NOT NULL COMMENT 'ID сущности (Анкета, Запрос, Марка итд)',
+  `mime_type` varchar(20) NOT NULL COMMENT 'Mime тип',
+  `order` int(11) NOT NULL DEFAULT '0' COMMENT 'Сортировка',
+  PRIMARY KEY (`id`),
+  KEY `fk_file_special_mark_id` (`entity_id`),
+  KEY `fk_file_user_id` (`user_id`),
+  CONSTRAINT `fk_file_user_id` FOREIGN KEY (`user_id`) REFERENCES `tbl_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+```
+

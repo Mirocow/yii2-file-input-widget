@@ -9,7 +9,7 @@ namespace mirocow\fileinput;
 use yii\base\InvalidConfigException;
 use yii\helpers\Html;
 use yii\widgets\InputWidget;
-use Yii;
+use yii;
 
 /**
  * FileInput renders a Jasny File Input Bootstrap plugin.
@@ -61,6 +61,10 @@ class FileInput extends InputWidget
 	 * Web page for possible events.
 	 */
 	public $clientEvents = [];
+
+    public $addMoreButton = false;
+
+    public $buttonCaption = 'Add more';
 
 
 	/**
@@ -123,7 +127,18 @@ class FileInput extends InputWidget
 					'It should be of "FileInput::STYLE_INPUT", "FileInput::STYLE_BUTTON", ' .
 					'"FileInput::STYLE_IMAGE" or "FileInput only.');
 		}
-		return $this->getView()->renderFile(Yii::getAlias($view), $params);
+
+		$fileinput_content = $this->getView()->renderFile(Yii::getAlias($view), $params);
+
+        if($this->addMoreButton){
+            return $this->getView()->renderFile($this->getViewPath() . '/addMoreButton.php', [
+              'field' => $fileinput_content,
+              'buttonCaption' => $this->buttonCaption,
+            ]);
+        } else
+        {
+            return $fileinput_content;
+        }
 	}
 
 	/**

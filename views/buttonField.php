@@ -3,6 +3,6 @@
 		<span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span>
 		<?=$field;?>
 	</span>
-	<span class="fileinput-filename"></span>
+	<span class="fileinput-filename fileinput-label"></span>
 	<a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
 </div>
