@@ -90,6 +90,7 @@ Example 2:
 Using a view: JQuery Ajax Upload
 ==============
 
+Js file
 ```js
 $('#my-form form').submit(function(){
 
@@ -135,6 +136,31 @@ $('#my-form form').submit(function(){
     return false;
 });
 ```
+Html template form
+```html
+<form class="form-horizontal" enctype="multipart/form-data" id="data-form">
+
+    <div class="col-xs-8">
+
+        <div class="form-group">
+            <textarea name="Order[comment]" class="form-control" rows="3" placeholder="Commet"></textarea>
+
+            <br>
+
+            <?= FileInput::widget([
+              'name' => 'Image[name][]',
+              'style' => FileInput::STYLE_INPUT,
+              //'style' => FileInput::STYLE_CUSTOM,
+              //'customView' => __DIR__ . '/widgets/file_input.php',
+              'addMoreButton' => true,
+              'buttonCaption' => 'Дбавить еще',
+            ])?>
+
+            <button type="submit" class="btn btn-success btn-sm2">Add more</button>
+        </div>
+    </div>
+</form>
+```                    
 
 Sql
 =================
