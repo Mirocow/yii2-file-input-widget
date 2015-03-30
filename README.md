@@ -153,10 +153,10 @@ Html template form
               //'style' => FileInput::STYLE_CUSTOM,
               //'customView' => __DIR__ . '/widgets/file_input.php',
               'addMoreButton' => true,
-              'buttonCaption' => 'Дбавить еще',
+              'buttonCaption' => 'Add more
             ])?>
 
-            <button type="submit" class="btn btn-success btn-sm2">Add more</button>
+            <button type="submit" class="btn btn-success btn-sm2">Submit</button>
         </div>
     </div>
 </form>
