@@ -42,6 +42,46 @@ Using a model:
     }
 ```
 
+or use LocalStorage provider
+
+```php
+    public function behaviors() {
+        $behaviors = [          
+            'fileupload' => [
+                'class' => 'mirocow\fileinput\behaviors\UploadFileBehavior',
+                'provider' => 'mirocow\fileinput\providers\LocalStorage',
+                'savePathAlias' => '@app/web/uploads',
+                'publicPath' => 'uploads',
+                'attributeName' => 'name',
+                'multiple' => true,
+                'fileTypes' => $this->fileTypes,
+            ],            
+        ];
+        
+        return $behaviors;
+    }
+```
+    
+or use Uploads.Im Storage provider
+
+```php
+    public function behaviors() {
+        $behaviors = [          
+            'fileupload' => [
+                'class' => 'mirocow\fileinput\behaviors\UploadFileBehavior',
+                'provider' => 'mirocow\fileinput\providers\UploadsImStorage',
+                'savePathAlias' => '@app/web/uploads',
+                'publicPath' => 'uploads',
+                'attributeName' => 'name',
+                'multiple' => true,
+                'fileTypes' => $this->fileTypes,
+            ],            
+        ];
+        
+        return $behaviors;
+    }
+```        
+
 or extendig model File
 
 Example:
@@ -177,10 +217,11 @@ CREATE TABLE `tbl_file` (
   `entity_id` int(11) NOT NULL COMMENT 'ID сущности (Анкета, Запрос, Марка итд)',
   `mime_type` varchar(20) NOT NULL COMMENT 'Mime тип',
   `order` int(11) NOT NULL DEFAULT '0' COMMENT 'Сортировка',
+  `data` text COMMENT 'Данные',
   PRIMARY KEY (`id`),
   KEY `fk_file_special_mark_id` (`entity_id`),
   KEY `fk_file_user_id` (`user_id`),
   CONSTRAINT `fk_file_user_id` FOREIGN KEY (`user_id`) REFERENCES `tbl_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 ```
 

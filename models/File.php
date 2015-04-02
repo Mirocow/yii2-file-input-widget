@@ -45,7 +45,8 @@
               [['user_id', 'entity_id', 'order'], 'integer'],
               [['create_time', 'update_time', 'order'], 'safe'],
               [['name', 'original_name', 'entity_type', 'path', 'title'], 'string', 'max' => 255],
-              [['mime_type'], 'string', 'max' => 20]
+              [['mime_type'], 'string', 'max' => 20],
+              [['data'], 'string']
             ];
         }
 
@@ -66,6 +67,7 @@
               'entity_id' => 'Entity ID',
               'mime_type' => 'Mime тип',
               'order' => 'Order',
+              'data' => 'Данные',
             ];
         }
 

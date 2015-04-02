@@ -131,7 +131,8 @@ class FileInput extends InputWidget
 		$fileinput_content = $this->getView()->renderFile(Yii::getAlias($view), $params);
 
         if($this->addMoreButton){
-            return $this->getView()->renderFile($this->getViewPath() . '/addMoreButton.php', [
+            $view = $this->getView();
+            return $view->renderFile($this->getViewPath() . '/addMoreButton.php', [
               'field' => $fileinput_content,
               'buttonCaption' => $this->buttonCaption,
             ]);

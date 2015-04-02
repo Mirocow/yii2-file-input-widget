@@ -166,6 +166,7 @@
                         $file_item->user_id = $user_id? $user_id: Yii::$app->user->id;
                         $file_item->path = $this->getPublicPath();
                         $file_item->order = $index;
+                        $file_item->data = isset($this->provider->data)? json_encode($this->provider->data): '';
                         $file_item->save(false);
 
                     }
@@ -176,7 +177,6 @@
             return $files;
         }
 
-
         public function getPublicPath()
         {
             if (!empty($this->owner->path))
@@ -186,6 +186,24 @@
             {
                 return $this->provider->getPublicPath();
             }
+        }
+
+        public function getData()
+        {
+            if (!empty($this->provider->data))
+            {
+                return json_decode($this->provider->data);
+            }
+        }
+
+        public function deleteAll($condition = '', $params = []){
+
+            if(method_exists($this->provider, 'deleteAll')){
+
+                return call_user_func_array([$this->provider, 'deleteAll'], []);
+
+            }
+
         }
 
     }
